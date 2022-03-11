@@ -2,18 +2,37 @@
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-pjWsGuynll5X395x7a5IwSiasx/wZ3V17RnDOy3sygE=' ">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Electron TodoS</title>
   </head>
   <body>
     <div>
-        <h1>Todo App</h1>
-        We are using Node.js <span id="node-version"></span>,
-        Chromium <span id="chrome-version"></span>,
-        and Electron <span id="electron-version"></span>.
+        <h1>My Todos</h1>
+        
+        <ul></ul>
+
     </div>
 
   </body>
+
+  <script>
+      const { ipcRenderer } = require("electron");
+      const list = document.querySelector("ul"); 
+
+      ipcRenderer.on("todo:add", (event, todo) => {
+          const li = document.createElement("li")
+          const text = document.createTextNode(todo);
+          li.appendChild(text)
+          list.appendChild(li)
+          ;
+      })
+
+      ipcRenderer.on("todo:clear", () => {
+          list.innerHTML = "";
+      })
+
+  </script>
+
 
 </html>

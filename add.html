@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-rU8YFRFNsnWLGGDkuMkyfP8JFH8lv68mmlhuOiRfQog=' ">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Add new Todo</title>
   </head>
@@ -16,5 +16,25 @@
     </div>
 
   </body>
+
+
+  <script>
+      const { ipcRenderer } = require("electron");
+
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", (event) => {
+          console.log("hi")
+            event.preventDefault();
+
+            const todo = document.querySelector("#addInput").value;
+
+            if(!todo) {
+                return
+            }
+
+            ipcRenderer.send("todo:add", todo);
+      })
+  </script>
 
 </html>
