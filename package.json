@@ -1,0 +1,14 @@
+{
+    "name": "first-electron-app",
+    "version": "1.0.0",
+    "description": "Todo App with Electron.",
+    "main": "index.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "author": "saalik",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^17.1.2"
+    }
+}
