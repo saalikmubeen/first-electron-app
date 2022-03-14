@@ -1,5 +1,7 @@
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 
+// console.log(app.isReady())
+
 const isMac = process.platform === "darwin";
 
 let mainWindow;
